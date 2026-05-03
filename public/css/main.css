@@ -1,30 +1,292 @@
-html, body {
-    background-color: lightblue;
-    font-family: Arial, sans-serif;
+/* Reset and Base Styles */
+* {
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    nav {
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #2c3e50;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
 
-        li {
-            display: inline;
-            margin-right: 15px;
-        }
+/* Navigation Styles */
+nav {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-        a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-            &:hover {
-                color: #0066cc;
-            }
-        }
+nav li {
+    margin: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+/* Headings */
+h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    border-left: 5px solid #3498db;
+    padding-left: 1.5rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #34495e;
+    margin: 1.5rem 0 1rem 0;
+}
+
+/* Home Page Specific */
+.main-logo {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.main-logo:hover {
+    transform: scale(1.02);
+}
+
+/* Organizations List */
+main ul {
+    list-style: none;
+    margin: 2rem 0;
+}
+
+main ul li {
+    background: white;
+    margin: 1rem 0;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+main ul li:hover {
+    transform: translateX(10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+main ul li img {
+    max-width: 60px;
+    height: auto;
+    border-radius: 10px;
+}
+
+main ul li strong {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    min-width: 180px;
+}
+
+/* Projects List */
+main ul li:has(h2) {
+    /* Style for project items */
+    background: #f8f9fa;
+}
+
+/* Categories Page Specific */
+main ul li:not(:has(img)) {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    justify-content: space-between;
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
     }
-}                
+
+    nav {
+        padding: 0.8rem 1rem;
+    }
+
+    nav ul {
+        gap: 0.8rem;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    main {
+        padding: 0 1rem;
+        margin: 1rem auto;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        padding-left: 1rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    main ul li {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    main ul li img {
+        margin-bottom: 0.5rem;
+    }
+
+    main ul li strong {
+        min-width: auto;
+    }
+
+    .main-logo {
+        margin: 1rem auto;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    nav ul {
+        gap: 0.5rem;
+    }
+
+    nav a {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    main ul li {
+        margin: 0.8rem 0;
+        padding: 0.8rem;
+    }
+}
+
+/* Accessibility - Focus States */
+nav a:focus,
+main a:focus {
+    outline: 3px solid #ffd700;
+    outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    body {
+        background: white;
+        color: black;
+    }
+
+    nav {
+        background: black;
+    }
+
+    nav a {
+        color: white;
+    }
+
+    main ul li {
+        border: 2px solid black;
+        background: white;
+        color: black;
+    }
+}
+
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Print Styles */
+@media print {
+    nav {
+        background: none;
+        color: black;
+    }
+
+    nav a {
+        color: black;
+    }
+
+    .main-logo {
+        max-width: 300px;
+    }
+
+    footer {
+        background: none;
+        color: black;
+        margin-top: 2rem;
+    }
+}
