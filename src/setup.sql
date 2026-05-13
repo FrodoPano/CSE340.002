@@ -68,3 +68,130 @@ INSERT INTO service_project (organization_id, title, description, location, date
 -- Verify data insertion
 -- ========================================
 SELECT * FROM service_project;
+
+-- ========================================
+-- Category Table
+-- ========================================
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- ========================================
+-- Project-Category Junction Table
+-- ========================================
+CREATE TABLE project_category (
+    project_id INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
+    PRIMARY KEY (project_id, category_id),
+    CONSTRAINT fk_project
+        FOREIGN KEY (project_id) 
+        REFERENCES service_project(project_id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_category
+        FOREIGN KEY (category_id) 
+        REFERENCES category(category_id)
+        ON DELETE CASCADE
+);
+
+-- ========================================
+-- Insert sample data: Categories
+-- ========================================
+INSERT INTO category (name) VALUES
+('Environmental'),
+('Education'),
+('Community Development'),
+('Health & Wellness'),
+('Youth Services');
+
+-- ========================================
+-- Insert sample data: Project-Category Associations
+-- ========================================
+
+-- BrightFuture Builders projects (organization_id = 1)
+-- Community Playground Renovation (project_id = 1)
+INSERT INTO project_category (project_id, category_id) VALUES
+(1, (SELECT category_id FROM category WHERE name = 'Community Development')),
+(1, (SELECT category_id FROM category WHERE name = 'Youth Services'));
+
+-- Senior Center Accessibility Ramp (project_id = 2)
+INSERT INTO project_category (project_id, category_id) VALUES
+(2, (SELECT category_id FROM category WHERE name = 'Community Development')),
+(2, (SELECT category_id FROM category WHERE name = 'Health & Wellness'));
+
+-- Neighborhood Sidewalk Repair (project_id = 3)
+INSERT INTO project_category (project_id, category_id) VALUES
+(3, (SELECT category_id FROM category WHERE name = 'Community Development'));
+
+-- School Garden Shed Construction (project_id = 4)
+INSERT INTO project_category (project_id, category_id) VALUES
+(4, (SELECT category_id FROM category WHERE name = 'Education')),
+(4, (SELECT category_id FROM category WHERE name = 'Youth Services'));
+
+-- Habitat Home Build Day (project_id = 5)
+INSERT INTO project_category (project_id, category_id) VALUES
+(5, (SELECT category_id FROM category WHERE name = 'Community Development'));
+
+-- GreenHarvest Growers projects (organization_id = 2)
+-- Spring Community Garden Planting (project_id = 6)
+INSERT INTO project_category (project_id, category_id) VALUES
+(6, (SELECT category_id FROM category WHERE name = 'Environmental')),
+(6, (SELECT category_id FROM category WHERE name = 'Community Development'));
+
+-- Farmers Market Setup and Support (project_id = 7)
+INSERT INTO project_category (project_id, category_id) VALUES
+(7, (SELECT category_id FROM category WHERE name = 'Community Development')),
+(7, (SELECT category_id FROM category WHERE name = 'Health & Wellness'));
+
+-- Food Bank Harvest Collection (project_id = 8)
+INSERT INTO project_category (project_id, category_id) VALUES
+(8, (SELECT category_id FROM category WHERE name = 'Community Development')),
+(8, (SELECT category_id FROM category WHERE name = 'Health & Wellness'));
+
+-- Urban Farming Workshop Series (project_id = 9)
+INSERT INTO project_category (project_id, category_id) VALUES
+(9, (SELECT category_id FROM category WHERE name = 'Education')),
+(9, (SELECT category_id FROM category WHERE name = 'Environmental'));
+
+-- School Nutrition Garden Installation (project_id = 10)
+INSERT INTO project_category (project_id, category_id) VALUES
+(10, (SELECT category_id FROM category WHERE name = 'Education')),
+(10, (SELECT category_id FROM category WHERE name = 'Environmental')),
+(10, (SELECT category_id FROM category WHERE name = 'Youth Services'));
+
+-- UnityServe Volunteers projects (organization_id = 3)
+-- Annual River Cleanup Day (project_id = 11)
+INSERT INTO project_category (project_id, category_id) VALUES
+(11, (SELECT category_id FROM category WHERE name = 'Environmental')),
+(11, (SELECT category_id FROM category WHERE name = 'Community Development'));
+
+-- Homeless Shelter Meal Service (project_id = 12)
+INSERT INTO project_category (project_id, category_id) VALUES
+(12, (SELECT category_id FROM category WHERE name = 'Community Development')),
+(12, (SELECT category_id FROM category WHERE name = 'Health & Wellness'));
+
+-- Back-to-School Supply Drive (project_id = 13)
+INSERT INTO project_category (project_id, category_id) VALUES
+(13, (SELECT category_id FROM category WHERE name = 'Education')),
+(13, (SELECT category_id FROM category WHERE name = 'Youth Services'));
+
+-- Senior Tech Literacy Program (project_id = 14)
+INSERT INTO project_category (project_id, category_id) VALUES
+(14, (SELECT category_id FROM category WHERE name = 'Education')),
+(14, (SELECT category_id FROM category WHERE name = 'Community Development'));
+
+-- Emergency Preparedness Fair (project_id = 15)
+INSERT INTO project_category (project_id, category_id) VALUES
+(15, (SELECT category_id FROM category WHERE name = 'Community Development')),
+(15, (SELECT category_id FROM category WHERE name = 'Health & Wellness'));
+
+-- ========================================
+-- Verify category data insertion
+-- ========================================
+SELECT 
+    sp.title AS project_title,
+    c.name AS category_name
+FROM service_project sp
+JOIN project_category pc ON sp.project_id = pc.project_id
+JOIN category c ON pc.category_id = c.category_id
+ORDER BY sp.title, c.name;

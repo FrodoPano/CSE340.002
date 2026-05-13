@@ -2,11 +2,21 @@
 <main>
     <h1><%= title %></h1>
     <h2>Our categories</h2>
-    <ul>
-        <li>Environmental</li>
-        <li>Educational</li>
-        <li>Community Service</li>
-        <li>Health and Wellness</li>
-    </ul>
+    
+    <% if (categories && categories.length > 0) { %>
+        <ul>
+            <% categories.forEach(category => { %>
+                <li><%= category.name %></li>
+            <% }); %>
+        </ul>
+    <% } else { %>
+        <ul>
+            <li>Environmental</li>
+            <li>Educational</li>
+            <li>Community Service</li>
+            <li>Health and Wellness</li>
+        </ul>
+        <p><em>More categories coming soon!</em></p>
+    <% } %>
 </main>
 <%- include('partials/footer') %>

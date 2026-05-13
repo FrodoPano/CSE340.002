@@ -4,6 +4,7 @@ import path from 'path';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
 import { getAllProjects } from './src/models/projects.js';
+import { getAllCategories } from './src/models/categories.js';
 
 // Define the the application environment
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
@@ -54,11 +55,14 @@ app.get('/projects', async (req, res) => {
 });
 
 app.get('/categories', async (req, res) => {
+    const categories = await getAllCategories();
     const title = 'Service Categories';
-    res.render('categories', { title });
+    
+    // Log categories to console to verify it's working
+    console.log('Retrieved categories:', categories);
+    
+    res.render('categories', { title, categories });
 });
-
-
 
 app.listen(PORT, async () => {
   try {
@@ -66,9 +70,12 @@ app.listen(PORT, async () => {
     console.log(`Server is running at http://127.0.0.1:${PORT}`);
     console.log(`Environment: ${NODE_ENV}`);
     
-    // Test the getAllProjects function on startup
+    // Test the functions on startup
     const testProjects = await getAllProjects();
     console.log('Test - Retrieved projects on startup:', testProjects.length, 'projects found');
+    
+    const testCategories = await getAllCategories();
+    console.log('Test - Retrieved categories on startup:', testCategories.length, 'categories found');
   } catch (error) {
     console.error('Error connecting to the database:', error);
   }
