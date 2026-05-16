@@ -88,13 +88,6 @@ app.listen(PORT, async () => {
     await testConnection();
     console.log(`Server is running at http://127.0.0.1:${PORT}`);
     console.log(`Environment: ${NODE_ENV}`);
-    
-    // Test the functions on startup
-    const testProjects = await getAllProjects();
-    console.log('Test - Retrieved projects on startup:', testProjects.length, 'projects found');
-    
-    const testCategories = await getAllCategories();
-    console.log('Test - Retrieved categories on startup:', testCategories.length, 'categories found');
   } catch (error) {
     console.error('Error connecting to the database:', error);
   }
