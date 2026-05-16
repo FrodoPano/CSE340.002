@@ -14,10 +14,12 @@ router.get('/organizations', showOrganizationsPage);
 router.get('/projects', showProjectsPage);
 router.get('/categories', showCategoriesPage);
 
+// Route for organization details page
+router.get('/organization/:id', showOrganizationDetailsPage);
+
 // error-handling routes
 router.get('/test-error', testErrorPage);
 
-// Route for organization details page
-router.get('/organization/:id', showOrganizationDetailsPage);
+
 
 export default router;
