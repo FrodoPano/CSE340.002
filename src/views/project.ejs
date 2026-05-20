@@ -20,6 +20,19 @@
                     <%= project.organization_name %>
                 </a>
             </p>
+            
+            <% if (categories && categories.length > 0) { %>
+                <div class="categories">
+                    <p><strong>Categories:</strong></p>
+                    <ul class="category-tags">
+                        <% categories.forEach(category => { %>
+                            <li class="category-tag">
+                                <a href="/category/<%= category.category_id %>"><%= category.name %></a>
+                            </li>
+                        <% }) %>
+                    </ul>
+                </div>
+            <% } %>
         </section>
     <% } else { %>
         <h1>Project Not Found</h1>
