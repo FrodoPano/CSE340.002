@@ -5,6 +5,7 @@ import { showHomePage } from './controllers/index.js';
 import { showOrganizationsPage } from './controllers/organizations.js';
 import { showOrganizationDetailsPage } from './controllers/organizations.js';
 import { showNewOrganizationForm, processNewOrganizationForm } from './controllers/organizations.js';
+import { organizationValidation } from './controllers/organizations.js';
 
 import { showProjectsPage, showProjectDetailsPage } from './controllers/projects.js';
 import { showCategoriesPage } from './controllers/categories.js';
