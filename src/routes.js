@@ -10,7 +10,7 @@ import {
     processEditOrganizationForm,
     organizationValidation
 } from './controllers/organizations.js';
-import { showProjectsPage, showProjectDetailsPage } from './controllers/projects.js';
+import { showProjectsPage, showProjectDetailsPage, showNewProjectForm, processNewProjectForm, projectValidation } from './controllers/projects.js';
 import { showCategoriesPage } from './controllers/categories.js';
 import { showCategoryDetailsPage } from './controllers/categoryDetails.js';
 import { testErrorPage } from './controllers/errors.js';
