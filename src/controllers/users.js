@@ -70,15 +70,6 @@ const requireLogin = (req, res, next) => {
     next();
 };
 
-/**
- * Middleware factory to require specific role for route access
- * Returns middleware that checks if user has the required role
- * 
- * @param {string} role - The role name required (e.g., 'admin', 'user')
- * @returns {Function} Express middleware function
- */
-
-
 
 const requireRole = (role) => {
     return (req, res, next) => {
@@ -97,7 +88,6 @@ const requireRole = (role) => {
 };
 
 
-
 const showDashboard = (req, res) => {
     const user = req.session.user;
     res.render('dashboard', { 
@@ -105,6 +95,13 @@ const showDashboard = (req, res) => {
         name: user.name,
         email: user.email
     });
+};
+
+const showUsersPage = async (req, res) => {
+    const users = await getAllUsers();
+    const title = 'All Users';
+    
+    res.render('users', { title, users });
 };
 
 export { 
@@ -115,5 +112,6 @@ export {
     processLogout, 
     requireLogin,
     requireRole, 
-    showDashboard 
+    showDashboard,
+    showUsersPage
 };
