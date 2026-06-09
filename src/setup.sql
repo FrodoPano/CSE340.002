@@ -251,3 +251,23 @@ UPDATE users SET role_id = (SELECT role_id FROM roles WHERE role_name = 'admin')
 SELECT users.user_id, users.email, roles.role_name 
 FROM users 
 JOIN roles ON users.role_id = roles.role_id;
+
+-- ========================================
+-- Volunteer Signups Table
+-- ========================================
+CREATE TABLE volunteer_signup (
+    signup_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    project_id INTEGER NOT NULL,
+    signup_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_volunteer_user
+        FOREIGN KEY (user_id) 
+        REFERENCES users(user_id)
+        ON DELETE CASCADE,
+    CONSTRAINT fk_volunteer_project
+        FOREIGN KEY (project_id) 
+        REFERENCES service_project(project_id)
+        ON DELETE CASCADE,
+    CONSTRAINT unique_volunteer_signup
+        UNIQUE (user_id, project_id)
+);

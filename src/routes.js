@@ -15,6 +15,7 @@ import { showCategoriesPage, showNewCategoryForm, processNewCategoryForm, showEd
 import { showCategoryDetailsPage } from './controllers/categoryDetails.js';
 import { showAssignCategoriesForm, processAssignCategoriesForm } from './controllers/assignCategories.js';
 import { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, requireLogin, requireRole, showDashboard, showUsersPage } from './controllers/users.js';
+import { signUpForProject, removeSignUpFromProject, removeSignUpFromDashboard } from './controllers/volunteers.js';
 import { testErrorPage } from './controllers/errors.js';
 
 const router = express.Router();
@@ -50,6 +51,11 @@ router.post('/edit-category/:id', requireRole('admin'), categoryValidation, proc
 // Admin-only route for assigning categories
 router.get('/assign-categories/:projectId', requireRole('admin'), showAssignCategoriesForm);
 router.post('/assign-categories/:projectId', requireRole('admin'), processAssignCategoriesForm);
+
+// Volunteer signup routes (require login)
+router.post('/project/:projectId/volunteer', requireLogin, signUpForProject);
+router.post('/project/:projectId/remove-volunteer', requireLogin, removeSignUpFromProject);
+router.post('/dashboard/remove-volunteer/:projectId', requireLogin, removeSignUpFromDashboard);
 
 // User registration routes
 router.get('/register', showUserRegistrationForm);

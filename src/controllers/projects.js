@@ -2,6 +2,7 @@ import { body, validationResult } from 'express-validator';
 import { getUpcomingProjects, getProjectDetails, createProject, updateProject } from '../models/projects.js';
 import { getCategoriesByProjectId } from '../models/categories.js';
 import { getAllOrganizations } from '../models/organizations.js';
+import { isUserVolunteer } from '../models/volunteers.js';
 
 const NUMBER_OF_UPCOMING_PROJECTS = 5;
 
@@ -41,7 +42,13 @@ const showProjectDetailsPage = async (req, res) => {
     const categories = await getCategoriesByProjectId(projectId);
     const title = project ? project.title : 'Project Not Found';
     
-    res.render('project', { title, project, categories });
+    // Check if current user is a volunteer for this project
+    let isVolunteer = false;
+    if (req.session && req.session.user) {
+        isVolunteer = await isUserVolunteer(req.session.user.user_id, projectId);
+    }
+    
+    res.render('project', { title, project, categories, isVolunteer });
 };
 
 const showNewProjectForm = async (req, res) => {
